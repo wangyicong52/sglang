@@ -192,7 +192,7 @@ else
 fi
 
 # ------------------------------------------------------------------------------
-# Python package site hygiene & install protoc
+# Python package site hygiene & install protoc/rust
 # ------------------------------------------------------------------------------
 # Clear torch compilation cache
 python3 -c 'import os, shutil, tempfile, getpass; cache_dir = os.environ.get("TORCHINDUCTOR_CACHE_DIR") or os.path.join(tempfile.gettempdir(), "torchinductor_" + getpass.getuser()); shutil.rmtree(cache_dir, ignore_errors=True)'
@@ -210,10 +210,10 @@ if [ -d "$SITE_PACKAGES" ]; then
     set -x
 fi
 
-# Install protoc
-bash "${SCRIPT_DIR}/../utils/install_protoc.sh"
+# Install protoc + Rust toolchain for setuptools-rust packages.
+bash "${SCRIPT_DIR}/../utils/install_rust_protoc.sh"
 
-mark_step_done "Python package site hygiene & install protoc"
+mark_step_done "Python package site hygiene & install protoc/rust"
 
 # ------------------------------------------------------------------------------
 # Pip / uv toolchain & stale package cleanup
